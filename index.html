@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#c2410c">
+<title>Mi ruta de inversión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+/* =========================================================
+   CONTENIDO — agrega lecciones, videos, etc. al final de cada lista.
+   Cada elemento necesita un "id" único (se usa para guardar "visto/leído").
+   ========================================================= */
+const DATA = {
+  lessons: [
+    { id: "l1", title: "Antes de invertir", tag: "Básicos",
+      body: [
+        "Arma primero un <b>fondo de emergencia</b> de 3 a 6 meses de tus gastos, en algo seguro y que puedas sacar rápido (líquido).",
+        "La <b>inflación</b> en México ronda el 4% anual: poco a poco le quita valor al dinero que solo tienes guardado.",
+        "<b>Cetesdirecto</b> te permite invertir desde $100, sin comisiones y prácticamente sin riesgo."
+      ] },
+    { id: "l2", title: "Metas de 1 a 5 años", tag: "Básicos",
+      body: [
+        "A este plazo lo importante es <b>proteger tu dinero</b> más que buscar ganancias grandes.",
+        "Usa <b>renta fija</b>: sabes de antemano cuánto vas a ganar.",
+        "Opciones: Cetes y Bonos en Cetesdirecto, pagarés bancarios (protegidos por el IPAB hasta cierto monto) y fondos de deuda.",
+        "Elige el plazo según cuándo necesitas el dinero: si tu meta es en 2 años, no lo amarres a 5."
+      ] },
+    { id: "l3", title: "Sácale provecho a GBM", tag: "GBM",
+      body: [
+        "<b>Saldo con rendimiento diario (Smart Cash):</b> que tu dinero sin invertir no se quede quieto.",
+        "<b>Fondos de deuda</b> de corto o mediano plazo: bajo riesgo y puedes sacar tu dinero con relativa facilidad.",
+        "<b>Aportaciones automáticas</b> cada quincena: la constancia hace más diferencia que buscar la inversión “perfecta”.",
+        "<b>Separa un portafolio</b> para tu meta y así ves cuánto llevas.",
+        "Acciones y ETFs: mejor para plazos de más de 5 años, o solo con una parte pequeña para practicar."
+      ] },
+    { id: "l4", title: "Lección 1 · GBM: primeros pasos", tag: "GBM",
+      body: [
+        "GBM es una <b>casa de bolsa mexicana</b> regulada por la CNBV (Comisión Nacional Bancaria y de Valores).",
+        "Separa tu dinero en dos: tu <b>fondo de emergencia</b> (siempre disponible) y el <b>dinero de tu meta</b> (el que inviertes).",
+        "Tipos de inversión en la app: <b>fondos de deuda</b> (bajo riesgo), <b>acciones</b> (pedacitos de empresas) y <b>ETFs</b> (canastas de muchas acciones)."
+      ],
+      exercise: "Abre la app de GBM y explora las secciones de inversión. No compres nada todavía, solo mira qué opciones aparecen." },
+    { id: "l5", title: "Lección 1 · Bitcoin: ¿qué es?", tag: "Bitcoin",
+      body: [
+        "Moneda digital que <b>no depende de ningún banco ni gobierno</b>; funciona en una red mundial de computadoras.",
+        "Solo existirán <b>21 millones</b> de bitcoins.",
+        "Es <b>muy volátil</b>: puede moverse más de 10% en un solo día.",
+        "Ejemplo: si inviertes $1,000 y cae 20%, te quedan $800.",
+        "Mete solo dinero que puedas perder, nunca el de tu meta ni tu fondo de emergencia.",
+        "En México se compra en plataformas como Bitso o Binance."
+      ],
+      exercise: "Para pensar: ¿cuál es tu meta concreta (viaje, auto o casa), cuánto cuesta y para cuándo la quieres?" }
+  ],
+
+  videos: [
+    { id: "v1", title: "Renta fija: la oportunidad que vuelve a los portafolios", channel: "GBM", date: "5 oct 2026",
+      url: "https://www.youtube.com/watch?v=NbUd5mo6UEg",
+      summary: "Charla con Luis Gonzali (Franklin Templeton): en México entre 70% y 80% de lo invertido está en renta fija por las tasas altas y rendimientos estables. Construye poco a poco y no te espantes con bajas temporales." },
+    { id: "v2", title: "¿Qué te hace realmente un buen inversionista?", channel: "GBM", date: "7 oct 2026",
+      url: "https://www.youtube.com/watch?v=gSz1XuMWvEY",
+      summary: "Lo que cuenta es acercarte a tu meta con un riesgo adecuado. Si necesitas el dinero en meses y lo tienes en tres acciones, una caída te arruina el plan." },
+    { id: "v3", title: "Cómo pasar del ahorro a la inversión", channel: "Rankia Latam", date: "29 sep 2026",
+      url: "https://www.youtube.com/watch?v=IVsjS8ljb7E",
+      summary: "Ordénate (ingresos, gastos, deudas) y aparta el ahorro desde tu presupuesto. No inviertas sin tener ahorros ni en algo que no entiendes." },
+    { id: "v4", title: "Las mejores inversiones en septiembre 2026", channel: "Omar Educación Financiera", date: "5 sep 2026",
+      url: "https://www.youtube.com/watch?v=eqSfmnzdQ6c",
+      summary: "Compara bancos y Sofipos contra Cetes. Sofipos protegidas hasta ~$220,000; bancos hasta poco más de $3.5 millones. Las tasas de 13–15% suelen ser promociones con requisitos. Son tasas de septiembre: pueden haber cambiado." },
+    { id: "v5", title: "Curso de criptomonedas desde cero", channel: "Dalto Emprende", date: "1 jul 2024",
+      url: "https://www.youtube.com/watch?v=Dnz6R_dC5qM",
+      summary: "Curso gratis de ~5 h: qué es una cripto, satoshis (100 millones por bitcoin), plataforma vs. wallet propia y cómo reconocer estafas. Con la primera hora basta para empezar." },
+    { id: "v6", title: "13% anual sin condiciones", channel: "Omar Educación Financiera", date: "26 ago 2026",
+      url: "https://www.youtube.com/watch?v=mYUE64jylTw",
+      summary: "Sofipo Kubo Financiero comparada con Cetes (sin resumen detallado)." }
+  ],
+
+  channels: [
+    { id: "c1", name: "GBM", handle: "@GBM-mx" },
+    { id: "c2", name: "Rankia Latam", handle: "@RankiaLatam" },
+    { id: "c3", name: "Omar Educación Financiera", handle: "@omareducacionfinanciera" },
+    { id: "c4", name: "Dalto Emprende", handle: "@daltoemprende" },
+    { id: "c5", name: "Mis Propias Finanzas", handle: "@MisPropiasFinanzas" },
+    { id: "c6", name: "El Sensei", handle: "@WealthyTrades", note: "Trading de corto plazo, avanzado." },
+    { id: "c7", name: "Master Traders", handle: "@MasterTradersl", note: "Trading de corto plazo, avanzado." }
+  ],
+
+  links: [
+    { id: "t1", name: "Cetesdirecto", url: "https://www.cetesdirecto.com", desc: "Cetes y Bonos del gobierno desde $100, sin comisiones." },
+    { id: "t2", name: "GBM", url: "https://gbm.com", desc: "Casa de bolsa: fondos de deuda, acciones y ETFs." },
+    { id: "t3", name: "Bitso", url: "https://bitso.com", desc: "Plataforma mexicana para comprar Bitcoin." },
+    { id: "t4", name: "CONDUSEF", url: "https://www.condusef.gob.mx", desc: "Revisa instituciones autorizadas y presenta quejas." },
+    { id: "t5", name: "IPAB", url: "https://www.gob.mx/ipab", desc: "Seguro que protege tus depósitos bancarios." }
+  ],
+
+  glossary: [
+    { id: "g1", term: "Inflación", def: "Aumento general de precios. Hace que con el mismo dinero compres menos con el tiempo." },
+    { id: "g2", term: "Renta fija", def: "Inversiones donde sabes de antemano cuánto vas a ganar, como los Cetes o un pagaré." },
+    { id: "g3", term: "Renta variable", def: "Inversiones cuyo valor sube y baja, como acciones o ETFs. Puedes ganar más, pero también perder." },
+    { id: "g4", term: "Cetes", def: "Certificados de la Tesorería: le prestas dinero al gobierno y te lo regresa con intereses en un plazo fijo." },
+    { id: "g5", term: "Fondo de deuda", def: "Fondo que junta dinero de muchas personas para invertirlo en instrumentos de renta fija. Bajo riesgo." },
+    { id: "g6", term: "Acción", def: "Un pedacito de una empresa. Si a la empresa le va bien, su precio puede subir." },
+    { id: "g7", term: "ETF", def: "Una canasta de muchas acciones (u otros activos) que compras de una sola vez. Reparte tu riesgo." },
+    { id: "g8", term: "Diversificar", def: "Repartir tu dinero en distintas inversiones para no depender de una sola." },
+    { id: "g9", term: "Volatilidad", def: "Qué tanto y qué tan rápido sube y baja el precio de una inversión." },
+    { id: "g10", term: "Comisión", def: "Lo que te cobra una plataforma o institución por un servicio, como comprar o vender." },
+    { id: "g11", term: "Wallet", def: "Billetera digital donde guardas tus criptomonedas. Puede ser de una plataforma o propia." },
+    { id: "g12", term: "Satoshi", def: "La unidad más pequeña de Bitcoin: un bitcoin se divide en 100 millones de satoshis." },
+    { id: "g13", term: "Sofipo", def: "Sociedad Financiera Popular. Ofrece ahorro e inversión; sus depósitos tienen una protección menor que la de los bancos." },
+    { id: "g14", term: "IPAB", def: "Instituto para la Protección al Ahorro Bancario. Protege tus depósitos en bancos hasta cierto monto." },
+    { id: "g15", term: "CNBV", def: "Comisión Nacional Bancaria y de Valores. Regula y supervisa a bancos y casas de bolsa como GBM." },
+    { id: "g16", term: "Fondo de emergencia", def: "Ahorro de 3 a 6 meses de gastos, seguro y disponible, para imprevistos." }
+  ]
+};
+</script>
+<style>
+  :root{
+    --bg:#fbf7f2; --card:#ffffff; --text:#2b2420; --muted:#7a6d64; --line:#ece3da;
+    --accent:#c2410c; --accent-soft:#fde8dc; --ok:#15803d; --ok-soft:#dcfce7; --shadow:0 1px 3px rgba(60,40,20,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#17130f; --card:#221c17; --text:#f3ebe3; --muted:#a8998c; --line:#352c24;
+      --accent:#fb923c; --accent-soft:#3b2416; --ok:#4ade80; --ok-soft:#173222; --shadow:none; }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:"Noto Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:15px;line-height:1.5;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+  button,input{font-family:inherit;font-size:inherit;color:inherit}
+  header{position:sticky;top:0;z-index:5;background:var(--bg);padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+  h1{font-size:19px;margin:0 0 2px;font-weight:700}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 10px}
+  .progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin-bottom:10px}
+  .progress span{display:block;height:100%;background:var(--accent);transition:width .3s}
+  .search{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);outline:none}
+  .search:focus{border-color:var(--accent)}
+  main{padding:14px 16px;max-width:640px;margin:0 auto}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:18px 0 8px;font-weight:600}
+  h2:first-child{margin-top:0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
+  .card.done{opacity:.72}
+  .card h3{font-size:16px;margin:0;font-weight:600;line-height:1.35}
+  .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);margin-bottom:6px}
+  .card ul{margin:8px 0 0;padding-left:18px}
+  .card li{margin:4px 0}
+  .card p{margin:8px 0 0}
+  .ex{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--accent-soft);font-size:14px}
+  .note{margin-top:8px;font-size:13px;color:var(--accent);font-weight:500}
+  a.btn{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:10px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:14px}
+  @media (prefers-color-scheme: dark){ a.btn{color:#1a120c} }
+  .row{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+  .check{flex:none;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none;padding:2px 0}
+  .check input{width:20px;height:20px;accent-color:var(--ok);margin:0}
+  .check.on{color:var(--ok);font-weight:600}
+  .empty{text-align:center;color:var(--muted);padding:30px 10px}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:10px 16px 20px}
+  nav{position:fixed;left:0;right:0;bottom:0;z-index:6;display:flex;background:var(--card);border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom)}
+  nav button{flex:1;border:0;background:none;padding:8px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--muted);cursor:pointer}
+  nav button .ic{font-size:19px;line-height:1}
+  nav button.active{color:var(--accent);font-weight:600}
+  mark{background:#fde68a;color:inherit;border-radius:3px;padding:0 1px}
+  @media (prefers-color-scheme: dark){ mark{background:#854d0e} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mi ruta de inversión 🌱</h1>
+  <p class="sub" id="progressText">GBM, Bitcoin y finanzas para principiantes</p>
+  <div class="progress"><span id="bar" style="width:0"></span></div>
+  <input class="search" id="q" type="search" placeholder="Buscar en todo: Cetes, wallet, GBM…" autocomplete="off">
+</header>
+<main id="main"></main>
+<footer>Contenido educativo, no es recomendación de inversión.</footer>
+<nav id="nav">
+  <button data-tab="lessons"><span class="ic">📘</span>Lecciones</button>
+  <button data-tab="videos"><span class="ic">▶️</span>Videos</button>
+  <button data-tab="channels"><span class="ic">📺</span>Canales</button>
+  <button data-tab="links"><span class="ic">🧰</span>Herramientas</button>
+  <button data-tab="glossary"><span class="ic">🔤</span>Glosario</button>
+</nav>
+<script>
+(function(){
+  const KEY = "abril-inversion-vistos";
+  const TABS = {
+    lessons:{label:"Lecciones", done:"Leído"},
+    videos:{label:"Videos", done:"Visto"},
+    channels:{label:"Canales", done:"Visto"},
+    links:{label:"Herramientas", done:"Visto"},
+    glossary:{label:"Glosario", done:"Leído"}
+  };
+  let seen = {};
+  try { seen = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) {}
+  let tab = location.hash.slice(1) in TABS ? location.hash.slice(1) : "lessons";
+  const $main = document.getElementById("main"), $q = document.getElementById("q");
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const norm = s => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+  const strip = s => String(s).replace(/<[^>]+>/g,"");
+  const chanUrl = c => "https://www.youtube.com/" + c.handle;
+
+  function hl(html, q){
+    if(!q) return html;
+    // resalta coincidencias solo en texto (no dentro de etiquetas)
+    return html.replace(/(^|>)([^<]+)/g, (m, a, txt) => {
+      const n = norm(txt); let out = "", i = 0, idx;
+      while((idx = n.indexOf(q, i)) !== -1){ out += txt.slice(i, idx) + "<mark>" + txt.slice(idx, idx+q.length) + "</mark>"; i = idx + q.length; }
+      return a + out + txt.slice(i);
+    });
+  }
+
+  const text = {
+    lessons: x => [x.title, x.tag, ...x.body, x.exercise||""].map(strip).join(" "),
+    videos: x => [x.title, x.channel, x.date, x.summary].join(" "),
+    channels: x => [x.name, x.handle, x.note||""].join(" "),
+    links: x => [x.name, x.url, x.desc].join(" "),
+    glossary: x => [x.term, x.def].join(" ")
+  };
+
+  function checkbox(id, label){
+    const on = !!seen[id];
+    return `<label class="check${on?" on":""}"><input type="checkbox" data-id="${id}"${on?" checked":""}>${label}</label>`;
+  }
+
+  const render = {
+    lessons: x => `<div class="card${seen[x.id]?" done":""}"><div class="row"><div><span class="tag">${esc(x.tag)}</span><h3>${esc(x.title)}</h3></div>${checkbox(x.id,"Leído")}</div>
+      <ul>${x.body.map(b=>`<li>${b}</li>`).join("")}</ul>${x.exercise?`<div class="ex">✏️ ${esc(x.exercise)}</div>`:""}</div>`,
+    videos: x => `<div class="card${seen[x.id]?" done":""}"><div class="row"><div><h3>${esc(x.title)}</h3><div class="meta">${esc(x.channel)} · ${esc(x.date)}</div></div>${checkbox(x.id,"Visto")}</div>
+      <p>${esc(x.summary)}</p><a class="btn" href="${esc(x.url)}" target="_blank" rel="noopener">Ver en YouTube</a></div>`,
+    channels: x => `<div class="card${seen[x.id]?" done":""}"><div class="row"><div><h3>${esc(x.name)}</h3><div class="meta">${esc(x.handle)}</div></div>${checkbox(x.id,"Visto")}</div>
+      ${x.note?`<div class="note">⚠️ ${esc(x.note)}</div>`:""}<a class="btn" href="${esc(chanUrl(x))}" target="_blank" rel="noopener">Abrir canal</a></div>`,
+    links: x => `<div class="card${seen[x.id]?" done":""}"><div class="row"><div><h3>${esc(x.name)}</h3><div class="meta">${esc(x.url.replace(/^https?:\/\//,""))}</div></div>${checkbox(x.id,"Visto")}</div>
+      <p>${esc(x.desc)}</p><a class="btn" href="${esc(x.url)}" target="_blank" rel="noopener">Abrir sitio</a></div>`,
+    glossary: x => `<div class="card${seen[x.id]?" done":""}"><div class="row"><h3>${esc(x.term)}</h3>${checkbox(x.id,"Leído")}</div><p>${esc(x.def)}</p></div>`
+  };
+
+  function updateProgress(){
+    const all = DATA.lessons.concat(DATA.videos);
+    const n = all.filter(x=>seen[x.id]).length;
+    document.getElementById("bar").style.width = (all.length ? n/all.length*100 : 0) + "%";
+    document.getElementById("progressText").textContent = `Llevas ${n} de ${all.length} lecciones y videos`;
+  }
+
+  function draw(){
+    const q = norm($q.value.trim());
+    document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active", !q && b.dataset.tab===tab));
+    const keys = q ? Object.keys(TABS) : [tab];
+    let html = "", total = 0;
+    keys.forEach(k=>{
+      const items = DATA[k].filter(x => !q || norm(text[k](x)).includes(q));
+      total += items.length;
+      if(!items.length) return;
+      if(q) html += `<h2>${TABS[k].label} (${items.length})</h2>`;
+      html += items.map(x => hl(render[k](x), q)).join("");
+    });
+    $main.innerHTML = total ? html : `<div class="empty">No encontré nada con “${esc($q.value)}”.</div>`;
+    updateProgress();
+  }
+
+  $main.addEventListener("change", e=>{
+    const id = e.target.dataset && e.target.dataset.id; if(!id) return;
+    if(e.target.checked) seen[id] = Date.now(); else delete seen[id];
+    try { localStorage.setItem(KEY, JSON.stringify(seen)); } catch(err) {}
+    draw();
+  });
+  document.getElementById("nav").addEventListener("click", e=>{
+    const b = e.target.closest("button"); if(!b) return;
+    tab = b.dataset.tab; $q.value = ""; history.replaceState(null,"","#"+tab); draw(); window.scrollTo(0,0);
+  });
+  $q.addEventListener("input", draw);
+  draw();
+})();
+</script>
+</body>
+</html>
